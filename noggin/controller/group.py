@@ -1,5 +1,5 @@
 import python_freeipa
-from flask import flash, g, redirect, render_template, url_for
+from flask import flash, g, redirect, render_template, url_for, request
 from flask_babel import _
 
 from noggin.form.add_group_member import AddGroupMemberForm
@@ -162,5 +162,7 @@ def group_remove_member(ipa, groupname):
 @bp.route('/groups/')
 @with_ipa()
 def groups(ipa):
-    groups = paginated_find(ipa, Group, fasgroup=True)
+    groups = paginated_find(
+        ipa, Group, a_criteria=request.args.get('searchterm'), fasgroup=True
+    )
     return render_template('groups.html', groups=groups)
