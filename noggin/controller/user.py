@@ -30,10 +30,10 @@ from noggin.utility.controllers import require_self, user_or_404, with_ipa
 from noggin.utility.forms import FormError, handle_form_errors
 from noggin_messages import UserUpdateV1
 
-from . import blueprint as bp
+from . import root
 
 
-@bp.route('/user/<username>/')
+@root.route('/user/<username>/')
 @with_ipa()
 def user(ipa, username):
     user = User(user_or_404(ipa, username))
@@ -105,7 +105,7 @@ def _user_mod(ipa, form, user, details, redirect_to):
         return redirect(url_for(redirect_to, username=user.username))
 
 
-@bp.route('/user/<username>/settings/profile/', methods=['GET', 'POST'])
+@root.route('/user/<username>/settings/profile/', methods=['GET', 'POST'])
 @with_ipa()
 @require_self
 def user_settings_profile(ipa, username):
@@ -143,7 +143,7 @@ def user_settings_profile(ipa, username):
     )
 
 
-@bp.route('/user/<username>/settings/keys/', methods=['GET', 'POST'])
+@root.route('/user/<username>/settings/keys/', methods=['GET', 'POST'])
 @with_ipa()
 @require_self
 def user_settings_keys(ipa, username):
@@ -174,7 +174,7 @@ def user_settings_keys(ipa, username):
     )
 
 
-@bp.route('/user/<username>/settings/otp/', methods=['GET', 'POST'])
+@root.route('/user/<username>/settings/otp/', methods=['GET', 'POST'])
 @with_ipa()
 @require_self
 def user_settings_otp(ipa, username):
@@ -224,7 +224,7 @@ def user_settings_otp(ipa, username):
     )
 
 
-@bp.route('/user/<username>/settings/otp/disable/', methods=['POST'])
+@root.route('/user/<username>/settings/otp/disable/', methods=['POST'])
 @with_ipa()
 @require_self
 def user_settings_otp_disable(ipa, username):
@@ -257,7 +257,7 @@ def user_settings_otp_disable(ipa, username):
     return redirect(url_for('.user_settings_otp', username=username))
 
 
-@bp.route('/user/<username>/settings/otp/enable/', methods=['POST'])
+@root.route('/user/<username>/settings/otp/enable/', methods=['POST'])
 @with_ipa()
 @require_self
 def user_settings_otp_enable(ipa, username):
@@ -284,7 +284,7 @@ def user_settings_otp_enable(ipa, username):
     return redirect(url_for('.user_settings_otp', username=username))
 
 
-@bp.route('/user/<username>/settings/otp/delete/', methods=['POST'])
+@root.route('/user/<username>/settings/otp/delete/', methods=['POST'])
 @with_ipa()
 @require_self
 def user_settings_otp_delete(ipa, username):
@@ -318,7 +318,7 @@ def user_settings_otp_delete(ipa, username):
     return redirect(url_for('.user_settings_otp', username=username))
 
 
-@bp.route('/user/<username>/settings/agreements/', methods=['GET', 'POST'])
+@root.route('/user/<username>/settings/agreements/', methods=['GET', 'POST'])
 @with_ipa()
 @require_self
 def user_settings_agreements(ipa, username):
